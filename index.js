@@ -5,14 +5,16 @@ let buttonSqure = document.querySelector('#drawSquare');
 let buttonPath = document.querySelector('#drawPath');
 let buttonDrag = document.querySelector('#dragElement');
 let points = document.querySelector('.circleGroup')
+let rectangle = document.querySelector("#rectangle")
 
 let elementStore = [];
 
 let pathflag = 0
 
-let selectedIndex="";
+let selectedIndex = "";
 
 function buttonClick() {
+    alert("draw the path")
     pathflag = 0;
     elementStore = []
     svg.addEventListener('click', function ({ target, x, y }) {
@@ -67,6 +69,82 @@ function closepath() {
     pathflag = 1
 }
 
-
-
 buttonPath.addEventListener('click', buttonClick)
+
+let selecteId;
+
+function movePoints() {
+    alert("drag event clicked")
+    svg.addEventListener('mousedown', (evt) => {
+        const circleId = evt.target.id;
+        if (!/circle\d/.test(circleId)) return
+        selecteId = circleId.replace('circle', "")
+
+    })
+    svg.addEventListener('mousemove', (evt) => {
+        if (!(selecteId >= 1)) return
+        const actual = {
+            x: Math.round((evt.offsetX / svg.clientWidth) * 300),
+            y: Math.round((evt.offsetY / svg.clientHeight) * 300)
+
+        }
+        elementStore[selecteId - 1] = actual
+        drawPath()
+    })
+
+    svg.addEventListener('mouseup', () => (selecteId = -1))
+}
+
+buttonDrag.addEventListener('click', movePoints);
+svg.addEventListener('dblclick', () => {
+    pathflag = 1
+})
+
+let triangleCordinates = []
+
+
+function drawTriange() {
+
+    svg.addEventListener('click', function (e) {
+        a=1;
+        const actualx = Math.round(e.x / svg.clientWidth * 300);
+        const actualy = Math.round(e.y / svg.clientHeight * 300)
+
+        let trianglePoints1 = { x: actualx, y: actualy }
+
+        triangleCordinates.push(trianglePoints1);
+
+        rectangle.setAttribute("x", triangleCordinates[0].x)
+        rectangle.setAttribute("y", triangleCordinates[0].y)
+        
+    })
+
+    let mouseFlag = 0;
+
+    svg.addEventListener('mousemove', function (e) {
+
+        if (mouseFlag == 0) {
+            const actualx = Math.round(e.x / svg.clientWidth * 300);
+            const actualy = Math.round(e.y / svg.clientHeight * 300)
+
+            let trianglePoints1 = { x: actualx, y: actualy }
+
+            triangleCordinates.push(trianglePoints1);
+
+            rectangle.setAttribute("x", triangleCordinates[0].x)
+            rectangle.setAttribute("y", triangleCordinates[0].y)
+
+            let rectangleWidth = Math.abs(triangleCordinates[triangleCordinates.length - 1].x - triangleCordinates[0].x)
+            let rectangleHeight = Math.abs(triangleCordinates[triangleCordinates.length - 1].y - triangleCordinates[0].y)
+
+            rectangle.setAttribute("width", rectangleWidth)
+            rectangle.setAttribute("height", rectangleHeight)
+        }
+    })
+    svg.addEventListener("mouseup", function () {
+        mouseFlag = 1;
+    })
+
+}
+
+buttonSqure.addEventListener('click', drawTriange)
