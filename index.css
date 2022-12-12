@@ -41,6 +41,10 @@ svg {
     box-shadow: 0 0 8px 0;
 }
 
+.btn:hover{
+    scale: .8;
+}
+
 .circle {
     display: block;
     width: 30px;
