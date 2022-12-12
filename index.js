@@ -69,3 +69,4 @@ function closepath() {
 
 
 
+buttonPath.addEventListener('click', buttonClick)
