@@ -1,6 +1,6 @@
 let svg = document.querySelector('#svg');//acsess the svg element 
 let path = document.querySelector('#path');// access the path element
-let buttonCircle = document.querySelector('#drawCircle')//access the button element
+let buttonCircle = document.querySelector('#drawCircle')
 let buttonSqure = document.querySelector('#drawSquare');
 let buttonPath = document.querySelector('#drawPath');
 let buttonDrag = document.querySelector('#dragElement');
@@ -8,8 +8,13 @@ let points = document.querySelector('.circleGroup')
 
 let elementStore = [];
 
-function buttonClick() {
+let pathflag = 0
 
+let selectedIndex="";
+
+function buttonClick() {
+    pathflag = 0;
+    elementStore = []
     svg.addEventListener('click', function ({ target, x, y }) {
 
         if (target.id === "circle1") return closepath()
@@ -20,13 +25,15 @@ function buttonClick() {
         y = Math.round(y / clientHeight * 300)
 
         elementStore.push({ x, y })
-        draw();
 
+        if (pathflag == 0) {
+            drawPath();
+        }
     })
 
 }
 
-function draw() {
+function drawPath() {
     let d = '';
     points.innerHTML = "";
     elementStore.forEach((p, i) => {
@@ -57,6 +64,8 @@ function closepath() {
     const lastcircle = document.querySelector(`#circle${elementStore.length}`)
     lastcircle.style.fill = "transparent"
     lastcircle.style.stroke = "none"
+    pathflag = 1
 }
 
-buttonPath.addEventListener('click', buttonClick)
+
+
