@@ -17,7 +17,7 @@ function buttonClick() {
     alert("draw the path")
     pathflag = 0;
     elementStore = []
-    trangleFlag=1
+    trangleFlag = 1;
     svg.addEventListener('click', function ({ target, x, y }) {
 
         if (target.id === "circle1") return closepath()
@@ -156,3 +156,69 @@ function drawTriange() {
 }
 
 buttonSqure.addEventListener('click', drawTriange)
+
+
+let circleCordinates = [];
+let circleFlag = 0;
+
+
+function drawCircle() {
+
+    alert("Circle Element click")
+
+    let cir = document.createElementNS("http://www.w3.org/2000/svg", 'circle')
+
+
+    svg.addEventListener('mousedown', function (e) {
+
+        if(circleFlag==0){
+
+        const actualx = Math.round(e.x / svg.clientWidth * 300);
+        const actualy = Math.round(e.y / svg.clientHeight * 300)
+
+        let circlePoints1 = { x: actualx, y: actualy }
+
+        circleCordinates.unshift(circlePoints1)
+
+        cir.setAttribute('cx', circleCordinates[0].x)
+        cir.setAttribute('cy', circleCordinates[0].y)
+        cir.setAttribute("fill", 'none')
+        cir.setAttribute('stroke', 'black')
+        svg.appendChild(cir)
+        }
+
+    })
+
+    svg.addEventListener('mousemove', function (e) {
+
+        const actualx = Math.round(e.x / svg.clientWidth * 300);
+        const actualy = Math.round(e.y / svg.clientHeight * 300)
+
+        let circlePoints2 = { x: actualx, y: actualy }
+        circleCordinates.push(circlePoints2)
+
+        let x1 = circleCordinates[0].x
+        let y1 = circleCordinates[0].y
+
+        let x2 = circleCordinates[circleCordinates.length - 1].x
+        let y2 = circleCordinates[circleCordinates.length - 1].y
+
+
+        let diameter = Math.floor(Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
+        let radius = diameter / 2;
+
+        if(circleFlag==0){
+        cir.setAttribute('r', radius)
+        }
+    })
+
+    svg.addEventListener('mouseup', function () {
+
+     circleFlag=1;
+
+    })
+}
+
+
+buttonCircle.addEventListener('click', drawCircle)
+
