@@ -17,7 +17,7 @@ svg {
 
 #tools {
     width: 60px;
-    height: 300px;
+    height: 330px;
     background: white;
     position: absolute;
     top: calc(50% - 150px);
@@ -35,14 +35,15 @@ svg {
     height: 50px;
     border-radius: 50%;
     border: none;
-    background-color:white;
+    background-color: white;
     position: relative;
     overflow: hidden;
     box-shadow: 0 0 8px 0;
 }
 
-.btn:hover{
+.btn:hover {
     scale: .8;
+    background-color: rgb(6, 204, 204);
 }
 
 .circle {
@@ -66,14 +67,6 @@ svg {
     left: 25%;
 }
 
-#drawimg {
-    width: 100%;
-    height: 100%;
-}
-#drag{
-    width: 100%;
-    height: 100%;
-}
 .color {
     fill: transparent;
     stroke: none;
@@ -87,4 +80,19 @@ svg {
 .color1 {
     fill: rgb(7, 245, 51);
     stroke: rgb(253, 0, 0);
+}
+
+.reset {
+    width: 30px;
+    height: 30px;
+}
+
+.pointer {
+    width: 30px;
+    height: 30px;
+}
+
+.drag1 {
+    width: 30px;
+    height: 30px;
 }
