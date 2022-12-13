@@ -8,6 +8,7 @@ body {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    background-color: black;
 }
 
 svg {
@@ -18,7 +19,7 @@ svg {
 #tools {
     width: 60px;
     height: 330px;
-    background: white;
+    background:black;
     position: absolute;
     top: calc(50% - 150px);
     left: 20px;
@@ -35,10 +36,12 @@ svg {
     height: 50px;
     border-radius: 50%;
     border: none;
-    background-color: white;
+    background-color:black;
     position: relative;
     overflow: hidden;
     box-shadow: 0 0 8px 0;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .btn:hover {
@@ -51,7 +54,7 @@ svg {
     width: 30px;
     height: 30px;
     border-radius: 50%;
-    border: 2px solid;
+    border: 3px solid white;
     position: absolute;
     top: 20%;
     left: 20%;
@@ -61,7 +64,7 @@ svg {
     display: block;
     width: 25px;
     height: 25px;
-    border: 2px solid;
+    border: 3px solid wheat;
     position: absolute;
     top: 25%;
     left: 25%;
@@ -95,4 +98,15 @@ svg {
 .drag1 {
     width: 30px;
     height: 30px;
+}
+
+.grid{
+    stroke: greenyellow;
+}
+
+circle{
+    stroke: white;
+}
+path{
+    stroke: white;
 }

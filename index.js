@@ -5,13 +5,14 @@ let buttonSqure = document.querySelector('#drawSquare');
 let buttonPath = document.querySelector('#drawPath');
 let buttonDrag = document.querySelector('#dragElement');
 let points = document.querySelector('.circleGroup')
-let buttonReset=document.querySelector('#resetScreen')
+let buttonReset = document.querySelector('#resetScreen')
 
 let elementStore = [];
 let pathflag = 0
 let selectedIndex = "";
 
 function buttonClick() {
+
     pathflag = 0;
     elementStore = []
     svg.addEventListener('click', function ({ target, x, y }) {
@@ -71,6 +72,7 @@ buttonPath.addEventListener('click', buttonClick)
 let selecteId;
 
 function movePoints() {
+
     svg.addEventListener('mousedown', (evt) => {
         const circleId = evt.target.id;
         if (!/circle\d/.test(circleId)) return
@@ -101,6 +103,7 @@ function drawTriange() {
 
     rectangleFlag = 0;
     triangleCordinates = []
+    pathflag=1;
 
     const rectangle = document.createElementNS("http://www.w3.org/2000/svg", 'rect')
     svg.addEventListener('mousedown', function (e) {
@@ -116,7 +119,7 @@ function drawTriange() {
             rectangle.setAttribute("x", triangleCordinates[0].x)
             rectangle.setAttribute("y", triangleCordinates[0].y)
             rectangle.setAttribute("fill", 'none')
-            rectangle.setAttribute('stroke', 'black')
+            rectangle.setAttribute('stroke', 'white')
             svg.appendChild(rectangle);
 
         }
@@ -154,7 +157,7 @@ function drawCircle() {
 
     circleFlag = 0;
     circleCordinates = []
-
+    pathflag=1;
 
     let cir = document.createElementNS("http://www.w3.org/2000/svg", 'circle')
     svg.addEventListener('mousedown', function (e) {
@@ -209,8 +212,8 @@ function drawCircle() {
 
 buttonCircle.addEventListener('click', drawCircle)
 
-buttonReset.addEventListener('click',function(){
+buttonReset.addEventListener('click', function () {
 
     location.reload();
-    
+
 })
