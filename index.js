@@ -5,19 +5,14 @@ let buttonSqure = document.querySelector('#drawSquare');
 let buttonPath = document.querySelector('#drawPath');
 let buttonDrag = document.querySelector('#dragElement');
 let points = document.querySelector('.circleGroup')
-// let rectangle = document.querySelector("#rectangle")
 
 let elementStore = [];
-
 let pathflag = 0
-
 let selectedIndex = "";
 
 function buttonClick() {
-    alert("draw the path")
     pathflag = 0;
-    elementStore = []
-    trangleFlag = 1;
+    elementStore=[]
     svg.addEventListener('click', function ({ target, x, y }) {
 
         if (target.id === "circle1") return closepath()
@@ -75,7 +70,6 @@ buttonPath.addEventListener('click', buttonClick)
 let selecteId;
 
 function movePoints() {
-    alert("drag event clicked")
     svg.addEventListener('mousedown', (evt) => {
         const circleId = evt.target.id;
         if (!/circle\d/.test(circleId)) return
@@ -97,22 +91,20 @@ function movePoints() {
 }
 
 buttonDrag.addEventListener('click', movePoints);
-svg.addEventListener('dblclick', () => {
-    pathflag = 1
-})
+
 
 let triangleCordinates = []
-let trangleFlag = 0
-
+let rectangleFlag = 0;
 
 function drawTriange() {
 
-    alert("triangle button is clicked")
+    rectangleFlag = 0;
+    triangleCordinates=[]
+
     const rectangle = document.createElementNS("http://www.w3.org/2000/svg", 'rect')
     svg.addEventListener('mousedown', function (e) {
 
-        if (trangleFlag == 0) {
-
+        if (rectangleFlag == 0) {
             const actualx = Math.round(e.x / svg.clientWidth * 300);
             const actualy = Math.round(e.y / svg.clientHeight * 300);
 
@@ -127,14 +119,11 @@ function drawTriange() {
             svg.appendChild(rectangle);
 
         }
-
     })
-
-    let mouseFlag = 0;
 
     svg.addEventListener('mousemove', function (e) {
 
-        if (mouseFlag == 0) {
+        if (rectangleFlag == 0) {
             const actualx = Math.round(e.x / svg.clientWidth * 300);
             const actualy = Math.round(e.y / svg.clientHeight * 300)
 
@@ -150,41 +139,39 @@ function drawTriange() {
         }
     })
     svg.addEventListener("mouseup", function () {
-        mouseFlag = 1;
+        rectangleFlag = 1;
     })
 
 }
 
 buttonSqure.addEventListener('click', drawTriange)
 
-
 let circleCordinates = [];
 let circleFlag = 0;
 
-
 function drawCircle() {
 
-    alert("Circle Element click")
+    circleFlag = 0;
+    circleCordinates=[]
+
 
     let cir = document.createElementNS("http://www.w3.org/2000/svg", 'circle')
-
-
     svg.addEventListener('mousedown', function (e) {
 
-        if(circleFlag==0){
+        if (circleFlag == 0) {
 
-        const actualx = Math.round(e.x / svg.clientWidth * 300);
-        const actualy = Math.round(e.y / svg.clientHeight * 300)
+            const actualx = Math.round(e.x / svg.clientWidth * 300);
+            const actualy = Math.round(e.y / svg.clientHeight * 300)
 
-        let circlePoints1 = { x: actualx, y: actualy }
+            let circlePoints1 = { x: actualx, y: actualy }
 
-        circleCordinates.unshift(circlePoints1)
+            circleCordinates.unshift(circlePoints1)
 
-        cir.setAttribute('cx', circleCordinates[0].x)
-        cir.setAttribute('cy', circleCordinates[0].y)
-        cir.setAttribute("fill", 'none')
-        cir.setAttribute('stroke', 'black')
-        svg.appendChild(cir)
+            cir.setAttribute('cx', circleCordinates[0].x)
+            cir.setAttribute('cy', circleCordinates[0].y)
+            cir.setAttribute("fill", 'none')
+            cir.setAttribute('stroke', 'black')
+            svg.appendChild(cir)
         }
 
     })
@@ -207,18 +194,17 @@ function drawCircle() {
         let diameter = Math.floor(Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
         let radius = diameter / 2;
 
-        if(circleFlag==0){
-        cir.setAttribute('r', radius)
+        if (circleFlag == 0) {
+            cir.setAttribute('r', radius)
         }
     })
 
     svg.addEventListener('mouseup', function () {
 
-     circleFlag=1;
+        circleFlag = 1;
 
     })
 }
-
 
 buttonCircle.addEventListener('click', drawCircle)
 
