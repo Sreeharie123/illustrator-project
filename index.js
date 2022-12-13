@@ -103,10 +103,12 @@ function drawTriange() {
 
     rectangleFlag = 0;
     triangleCordinates = []
-    pathflag=1;
+    pathflag = 1;
 
-    const rectangle = document.createElementNS("http://www.w3.org/2000/svg", 'rect')
+    let rectangle
     svg.addEventListener('mousedown', function (e) {
+
+        rectangle = document.createElementNS("http://www.w3.org/2000/svg", 'rect')
 
         if (rectangleFlag == 0) {
             const actualx = Math.round(e.x / svg.clientWidth * 300);
@@ -157,10 +159,12 @@ function drawCircle() {
 
     circleFlag = 0;
     circleCordinates = []
-    pathflag=1;
+    pathflag = 1;
 
-    let cir = document.createElementNS("http://www.w3.org/2000/svg", 'circle')
+    let cir;
     svg.addEventListener('mousedown', function (e) {
+
+        cir = document.createElementNS("http://www.w3.org/2000/svg", 'circle')
 
         if (circleFlag == 0) {
 
