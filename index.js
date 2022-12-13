@@ -5,7 +5,7 @@ let buttonSqure = document.querySelector('#drawSquare');
 let buttonPath = document.querySelector('#drawPath');
 let buttonDrag = document.querySelector('#dragElement');
 let points = document.querySelector('.circleGroup')
-let rectangle = document.querySelector("#rectangle")
+// let rectangle = document.querySelector("#rectangle")
 
 let elementStore = [];
 
@@ -17,6 +17,7 @@ function buttonClick() {
     alert("draw the path")
     pathflag = 0;
     elementStore = []
+    trangleFlag=1
     svg.addEventListener('click', function ({ target, x, y }) {
 
         if (target.id === "circle1") return closepath()
@@ -101,22 +102,32 @@ svg.addEventListener('dblclick', () => {
 })
 
 let triangleCordinates = []
+let trangleFlag = 0
 
 
 function drawTriange() {
 
-    svg.addEventListener('click', function (e) {
-        a=1;
-        const actualx = Math.round(e.x / svg.clientWidth * 300);
-        const actualy = Math.round(e.y / svg.clientHeight * 300)
+    alert("triangle button is clicked")
+    const rectangle = document.createElementNS("http://www.w3.org/2000/svg", 'rect')
+    svg.addEventListener('mousedown', function (e) {
 
-        let trianglePoints1 = { x: actualx, y: actualy }
+        if (trangleFlag == 0) {
 
-        triangleCordinates.push(trianglePoints1);
+            const actualx = Math.round(e.x / svg.clientWidth * 300);
+            const actualy = Math.round(e.y / svg.clientHeight * 300);
 
-        rectangle.setAttribute("x", triangleCordinates[0].x)
-        rectangle.setAttribute("y", triangleCordinates[0].y)
-        
+            let trianglePoints1 = { x: actualx, y: actualy }
+
+            triangleCordinates.unshift(trianglePoints1);
+
+            rectangle.setAttribute("x", triangleCordinates[0].x)
+            rectangle.setAttribute("y", triangleCordinates[0].y)
+            rectangle.setAttribute("fill", 'none')
+            rectangle.setAttribute('stroke', 'black')
+            svg.appendChild(rectangle);
+
+        }
+
     })
 
     let mouseFlag = 0;
@@ -130,9 +141,6 @@ function drawTriange() {
             let trianglePoints1 = { x: actualx, y: actualy }
 
             triangleCordinates.push(trianglePoints1);
-
-            rectangle.setAttribute("x", triangleCordinates[0].x)
-            rectangle.setAttribute("y", triangleCordinates[0].y)
 
             let rectangleWidth = Math.abs(triangleCordinates[triangleCordinates.length - 1].x - triangleCordinates[0].x)
             let rectangleHeight = Math.abs(triangleCordinates[triangleCordinates.length - 1].y - triangleCordinates[0].y)
