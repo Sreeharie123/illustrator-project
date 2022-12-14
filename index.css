@@ -102,6 +102,7 @@ svg {
 
 .grid{
     stroke: greenyellow;
+    /* display: none; */
 }
 
 circle{
