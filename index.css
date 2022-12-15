@@ -9,6 +9,7 @@ body {
     height: 100vh;
     overflow: hidden;
     background-color: black;
+    border: 3px solid white;
 }
 
 svg {
@@ -102,7 +103,7 @@ svg {
 
 .grid{
     stroke: greenyellow;
-    /* display: none; */
+    display: none;
 }
 
 circle{
@@ -110,4 +111,8 @@ circle{
 }
 path{
     stroke: white;
+}
+.bgcolor{
+    background-color: rgb(0, 166, 172);
+    scale: 0.8;
 }

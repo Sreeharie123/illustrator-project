@@ -13,6 +13,8 @@ let selectedIndex = "";
 
 function buttonClick() {
 
+    buttonPath.classList.toggle('bgcolor')
+
     pathflag = 0;
     elementStore = []
     svg.addEventListener('click', function ({ target, x, y }) {
@@ -73,6 +75,9 @@ let selecteId;
 
 function movePoints() {
 
+    buttonDrag.classList.toggle('bgcolor')
+
+
     svg.addEventListener('mousedown', (evt) => {
         const circleId = evt.target.id;
         if (!/circle\d/.test(circleId)) return
@@ -100,6 +105,9 @@ let triangleCordinates = []
 let rectangleFlag = 0;
 
 function drawTriange() {
+
+    buttonSqure.classList.toggle('bgcolor')
+
 
     rectangleFlag = 0;
     triangleCordinates = []
@@ -156,6 +164,9 @@ let circleCordinates = [];
 let circleFlag = 0;
 
 function drawCircle() {
+
+    buttonCircle.classList.toggle('bgcolor')
+
 
     circleFlag = 0;
     circleCordinates = []
@@ -217,7 +228,6 @@ function drawCircle() {
 buttonCircle.addEventListener('click', drawCircle)
 
 buttonReset.addEventListener('click', function () {
-
     location.reload();
 
 })
